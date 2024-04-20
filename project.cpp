@@ -3,40 +3,31 @@
 
 using namespace std;
 
-class Vehicle{
+class Vehilce{
     public:
-        int type;
-        void engage();
-        void disengage();
-    
-    private:
-        int flight_time;
-        int number_flights;
-        bool connection;
-};
+        string name;
 
-class Pilot{
-    public:
-        string user_name;
-        string rank;
-};
+}
 
 class Fleet{
     public:
-        vector<string> vehicles;
-        vector<string> pilots;
-};   
-
-void Vehicle::engage(){
-    this->connection = true;
+        void print_vehicles();
+        void add_vehicles(Vehicle vehicle)
+    
+    private:
+        vector<Vehicle> vehicle_list;
 }
 
-void Vehicle::disengage(){
-    this->connection = false;  
+Fleet::print_vehicles(){
+    for (Vehicle v : vehicle_list){
+        cout << v.name << endl;
+    }
 }
-
 
 
 int main(){
-
+    Vehicle myVehicle = new Vehicle
+    Fleet myFleet;
+    Fleet.add_vehicles(myVehicle)
+    Fleet.print_vehicles()
 }
