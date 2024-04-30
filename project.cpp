@@ -89,15 +89,15 @@ class User{
 }
 
 int main(){
+    // Create Vehicle
     Vehicle myVehicle1;
     myVehicle1.name = "Drone1";
-
     Vehicle myVehicle2;
     myVehicle2.name = "Drone2";
-
     Vehicle myVehicle3;
     myVehicle3.name = "Drone3";
 
+    // Create Fleet
     Fleet myFleet;
     myFleet.turn_on_vehicles();
     myFleet.turn_off_vehicles();
@@ -106,6 +106,7 @@ int main(){
     myFleet.add_vehicles(myVehicle3);
     myFleet.print_vehicles();
 
+    // Start Program
     myVehicle2.start_flight();
     this_thread::sleep_for(std::chrono::seconds(5));
     myVehicle2.end_flight();
