@@ -72,29 +72,33 @@ impl Fleet {
     }
 }
 // User Structure 
-struct User {
+struct User<'a> { 
     username: String,
-    connected_vehicle: Vehicle,
+    connected_vehicle: Option<&'a Vehicle>,
 }
 
-impl User {
+impl<'a> User<'a> {
     fn new(username: &str) -> Self {
         Self {
             username: String::from(username),
             connected_vehicle: None,
         }
     }
-
-    fn connect(&mut self, vehicle_list: &Vec<Vehicle>) {
+    fn connect(&mut self, vehicle_list: &'a Vec<Vehicle>) {
         let mut lowest_flight_vehicle = &vehicle_list[0];
-        for vehicle in vehicle_list.iter() {
+        for vehicle in vehicle_list {
             if vehicle.flight_time < lowest_flight_vehicle.flight_time {
                 lowest_flight_vehicle = vehicle;
             }
         }
-        self.connected_vehicle = *lowest_flight_vehicle;
-        println!("{}", lowest_flight_vehicle.id);
+        self.connected_vehicle = Some(lowest_flight_vehicle);
+        // lowest_flight_vehicle.start_flight();
+        println!("{}", lowest_flight_vehicle.id); 
     }
+//     fn disconnect(&mut self){
+//         self.connected_vehicle.end_flight();
+//         self.connected_vehicle = None;
+//     }
 }
 
 fn main() {
@@ -116,4 +120,5 @@ fn main() {
     fleet1.add_vehicle(vehicle3);
 
     user1.connect(&fleet1.vehicle_list);
+    user1.disconnect();
 }
