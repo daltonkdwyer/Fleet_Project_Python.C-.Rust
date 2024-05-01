@@ -2,7 +2,7 @@
 # The tool should: 1) Allow creation of a fleet, add vehicles to the fleet, and create users
 # Allow users to connect to a vehicle, disconnect to a vehicle
 # The vehicle should record when it is connected to and disconnected from, and record it's drive time (default is 0)
-# On connection, 
+# On connection, the tool will provide the vehicle with the shortest amount of flight hours for the user to drive.
 
 import time
 
