@@ -54,11 +54,21 @@ impl Fleet {
     }
     fn print_vehicle(&mut self){
         for item in &self.vehicle_list{
-            println!("{}", item.id)
+            println!("{}", item.id);
         }
     }
     fn add_vehicle(&mut self, new_vehicle: Vehicle){
-        self.vehicle_list.push(new_vehicle)
+        let mut insertion_index = 0;
+        for (i = 0, i < self.vehicle_list.length(), i++){
+            if new_vehicle.flight_time < self.vehicle_list[i].flight_time{
+                insertion_index = i;
+                break;
+            }
+        }
+        self.vehicle_list.insert(insertion_index, new_vehicle);
+    }
+    fn remove_vehicle(&mut self, vehicle_to_remove: Vehilce){
+        self.vehicle_list.remove(vehicle_to_remove);
     }
     fn turn_on_vehicles(&mut self){
         for vehicle in &mut self.vehicle_list{
@@ -114,7 +124,6 @@ fn main() {
     vehicle1.start_flight();
     sleep(StdDuration::from_secs(1));
     vehicle1.end_flight();
-
     
     fleet1.add_vehicle(vehicle1);
     fleet1.add_vehicle(vehicle2);
