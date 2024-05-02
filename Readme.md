@@ -1,5 +1,8 @@
 Dalton K. Dwyer CSPB 2270 Final Project Submission
 
+To view the main Rust code, go to: fleet_rust>src>main.rs
+To view the backup Python code, go to: project.py
+
 Table of Contents: 
     1) Project Summary
     2) Data Structures
