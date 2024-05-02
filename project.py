@@ -1,8 +1,8 @@
 # Making a class structure for fleet management
-# The tool should: 1) Allow creation of a fleet, add vehicles to the fleet, and create users
-# Allow users to connect to a vehicle, disconnect to a vehicle
-# The vehicle should record when it is connected to and disconnected from, and record it's drive time (default is 0)
-# On connection, the tool will provide the vehicle with the shortest amount of flight hours for the user to drive.
+# The tool should: 
+# 1) Create a fleet data strcucture, create a vehicle data structure, and finally create a user data structure
+# 2) Allow users to connect to the vehicle with the lowest total drive time
+# 3) The vehicle should record when it is connected to and disconnected from, and record the additional drive time as long as it is connected
 
 import time
 
