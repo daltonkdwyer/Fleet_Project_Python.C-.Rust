@@ -67,7 +67,7 @@ impl Fleet {
         }
         self.vehicle_list.insert(insertion_index, new_vehicle);
     }
-    fn remove_vehicle(&mut self, vehicle_to_remove: Vehilce){
+    fn remove_vehicle(&mut self, vehicle_to_remove: Vehicle){
         self.vehicle_list.remove(vehicle_to_remove);
     }
     fn turn_on_vehicles(&mut self){
@@ -96,11 +96,11 @@ impl User{
     }
     fn connect(&mut self, vehicle_list: &Vec<Vehicle>) {
         let mut lowest_flight_vehicle = &vehicle_list[0];
-        for vehicle in vehicle_list {
-            if vehicle.flight_time < lowest_flight_vehicle.flight_time {
-                lowest_flight_vehicle = vehicle;
-            }
-        }
+        // for vehicle in vehicle_list {
+        //     if vehicle.flight_time < lowest_flight_vehicle.flight_time {
+        //         lowest_flight_vehicle = vehicle;
+        //     }
+        // }
         self.connected_vehicle = Some(lowest_flight_vehicle);
         // Bug #3: The compiler is really unhappy about the line below. I'm trying to tell the vehicle that the user will be controlling to take off. I think the issue's root is the same as Bug #1: I've passed in a vector of actual vehicles, instead of a reference to the original vehicle. So the 'lowest flight vehicle' maybe doesn't have access to the functions a normal vehicle would have access to? 
         lowest_flight_vehicle.start_flight(); 
