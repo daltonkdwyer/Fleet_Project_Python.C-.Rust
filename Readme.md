@@ -1,10 +1,11 @@
 Dalton K. Dwyer CSPB 2270 Final Project Submission
 
-1) Project Summary
-2) Data Structures
-3) Algorithm
-4) NOTES ON RUST
-5) Compiling Notes
+Table of Contents: 
+    1) Project Summary
+    2) Data Structures
+    3) Algorithm
+    4) NOTES ON RUST
+    5) Compiling Notes
 
 1) Project Summary
 
