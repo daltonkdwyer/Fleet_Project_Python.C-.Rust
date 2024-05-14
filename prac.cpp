@@ -9,11 +9,21 @@ string my_var1 = my_name;
 // string my_var1 = *my_name_pointer;
 // string& my_var2 = *my_name_pointer;
 
-int main(){
-    cout << my_name << endl;
-    cout << my_var1 << endl;
-    // cout << &my_var2 << endl;
+void change_name_raw(string name){
+    name = name + "T";
+    cout << name << endl;
 }
+
+int main(){
+    // cout << &my_name << endl;
+    // cout << &my_var1 << endl;
+    // cout << &my_var2 << endl;
+    change_name_raw(my_name);
+    cout << my_name << endl;
+
+}
+
+
 
 
 // struct Person{
@@ -24,15 +34,12 @@ int main(){
 // Person Dalton;
 // // Person.name = "Dalton";
 
-// void change_name_raw(string name){
-//     name = name + "T";
-// }
+
 
 // void change_name_pointer(string* name){
 //     *name = *name + "E";
 // }
 
-// int main(){
 //     // cout << my_unref << endl;
 //     cout << my_name << endl;
 //     change_name_raw(my_name);
@@ -42,4 +49,3 @@ int main(){
 
 //     Dalton.name = "Big D"; 
 //     cout << Dalton.name << endl;
-// }
