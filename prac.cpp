@@ -5,7 +5,7 @@ using namespace std;
 string my_name = "Dalton";
 string* my_name_pointer = &my_name;
 string my_var1 = my_name;
-my_var1 = "Bannana"
+
 // string my_var1 = *my_name_pointer;
 // string& my_var2 = *my_name_pointer;
 
