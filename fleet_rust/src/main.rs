@@ -41,7 +41,7 @@ impl Vehicle {
 // Fleet Structure
 struct Fleet{
     id: String,
-    vehicle_list: Vec<Vehicle>,
+    vehicle_list: Vec<Vehicle>, // Bug #1: this vec should be a vector of references, not actual vehicles. But when I try to make this Vec<*Vehicle> like I would in C++, the compiler gets angry with me.
     active_vehicles: Vec<Vehicle>,
 }
 impl Fleet {
@@ -54,11 +54,21 @@ impl Fleet {
     }
     fn print_vehicle(&mut self){
         for item in &self.vehicle_list{
-            println!("{}", item.id)
+            println!("{}", item.id);
         }
     }
     fn add_vehicle(&mut self, new_vehicle: Vehicle){
-        self.vehicle_list.push(new_vehicle)
+        let mut insertion_index = 0;
+        for (i = 0, i < self.vehicle_list.length(), i++){
+            if new_vehicle.flight_time < self.vehicle_list[i].flight_time{
+                insertion_index = i;
+                break;
+            }
+        }
+        self.vehicle_list.insert(insertion_index, new_vehicle);
+    }
+    fn remove_vehicle(&mut self, vehicle_to_remove: Vehicle){
+        self.vehicle_list.remove(vehicle_to_remove);
     }
     fn turn_on_vehicles(&mut self){
         for vehicle in &mut self.vehicle_list{
@@ -72,33 +82,34 @@ impl Fleet {
     }
 }
 // User Structure 
-struct User<'a> { 
+struct User { //Bug #2: ChatGPT is telling me I need to put in <a'> tags here, but I'm not sure why or what they do. So I'm leaving my mistake in, to solve for later.
     username: String,
-    connected_vehicle: Option<&'a Vehicle>,
+    connected_vehicle: Option<Vehicle>,
 }
 
-impl<'a> User<'a> {
+impl User{
     fn new(username: &str) -> Self {
         Self {
             username: String::from(username),
             connected_vehicle: None,
         }
     }
-    fn connect(&mut self, vehicle_list: &'a Vec<Vehicle>) {
+    fn connect(&mut self, vehicle_list: &Vec<Vehicle>) {
         let mut lowest_flight_vehicle = &vehicle_list[0];
-        for vehicle in vehicle_list {
-            if vehicle.flight_time < lowest_flight_vehicle.flight_time {
-                lowest_flight_vehicle = vehicle;
-            }
-        }
+        // for vehicle in vehicle_list {
+        //     if vehicle.flight_time < lowest_flight_vehicle.flight_time {
+        //         lowest_flight_vehicle = vehicle;
+        //     }
+        // }
         self.connected_vehicle = Some(lowest_flight_vehicle);
-        // lowest_flight_vehicle.start_flight();
+        // Bug #3: The compiler is really unhappy about the line below. I'm trying to tell the vehicle that the user will be controlling to take off. I think the issue's root is the same as Bug #1: I've passed in a vector of actual vehicles, instead of a reference to the original vehicle. So the 'lowest flight vehicle' maybe doesn't have access to the functions a normal vehicle would have access to? 
+        lowest_flight_vehicle.start_flight(); 
         println!("{}", lowest_flight_vehicle.id); 
     }
-//     fn disconnect(&mut self){
-//         self.connected_vehicle.end_flight();
-//         self.connected_vehicle = None;
-//     }
+    fn disconnect(&mut self){
+        self.connected_vehicle.end_flight();
+        self.connected_vehicle = None;
+    }
 }
 
 fn main() {
@@ -113,7 +124,6 @@ fn main() {
     vehicle1.start_flight();
     sleep(StdDuration::from_secs(1));
     vehicle1.end_flight();
-
     
     fleet1.add_vehicle(vehicle1);
     fleet1.add_vehicle(vehicle2);
