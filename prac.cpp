@@ -10,7 +10,7 @@ string my_var1 = my_name;
 // string& my_var2 = *my_name_pointer;
 
 void change_name_raw(string name){
-    name = name + "T";
+    name += "T";
     cout << name << endl;
 }
 
